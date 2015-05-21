@@ -29,8 +29,8 @@ class PostsController extends Controller
     	
     	$request = $this->getRequest();
     	
-    	try
-    	{
+//     	try
+//     	{
 	    	$filters = array(
 	    		PostRepository::FILTER_AUTHOR     => $request->get('author', null),
 	    		PostRepository::FILTER_START_DATE => $request->get('from', null),
@@ -39,11 +39,11 @@ class PostsController extends Controller
 	    	
 	    	$postList = $this->getPostRepository()->findFilteredResults($filters);
 	    	$response->setData($this->postFormatter->formatList($postList));
-    	}
-    	catch (\Exception $e)
-    	{
-    		$response->setStatusCode(JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-    	}
+//     	}
+//     	catch (\Exception $e)
+//     	{
+//     		$response->setStatusCode(JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+//     	}
     	
         return $response;
     }

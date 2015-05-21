@@ -54,9 +54,7 @@ class PostRepository extends EntityRepository
 			$qb->setParameter('end_date', $filters[self::FILTER_END_DATE]);
 		}
 		
-		$result = $qb->getQuery()->getArrayResult();
-		
-		return new \ArrayIterator($result);
+		return $qb->getQuery()->execute();
 	}
 	
 	private function filterExists($key, array $filters)

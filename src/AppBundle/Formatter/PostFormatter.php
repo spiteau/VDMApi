@@ -14,15 +14,17 @@ class PostFormatter
 		);
 	}
 	
-	public function formatList(\Iterator $postList)
+	public function formatList(array $postList)
 	{
 		return array(
-			'posts' => $postList,
+			'posts' => array_map(function(Post $post){
+				return $this->formatPost($post);
+			}, $postList),
 			'count' => count($postList),
 		);
 	}
 	
-	private function formatPost()
+	private function formatPost(Post $post)
 	{
 		return array (
 			'id'      => $post->getId(),
