@@ -11,12 +11,25 @@ class PostRepository extends EntityRepository
 	const FILTER_START_DATE = 'startDate';
 	const FILTER_END_DATE   = 'endDate';
 	
-	public function save(Post $post)
+	public function save(Post $post, $flush = true)
 	{
 		$em = $this->getEntityManager();
-		
 		$em->merge($post);
-		$em->flush();
+		
+		if($flush)
+		{
+			$em->flush();
+		}
+	}
+	
+	public function saveList(array $postList)
+	{
+		foreach($postList as $post)
+		{
+			$this->save($post, false);
+		}
+		
+		$this->getEntityManager()->flush();
 	}
 	
 	public function findFilteredResults(array $filters = array())
